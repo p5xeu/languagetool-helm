@@ -1,7 +1,8 @@
 ---
 replicaCount: 3
 
-image_repo: "harbor.noris.net/docker.io/erikvl87/languagetool"
+image_repo: "erikvl87/languagetool"
+version: "latest"
 
 port: 8010
 

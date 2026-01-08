@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: languagetool
-          image: {{ .Values.image_repo }}
+          image: "{{ .Values.image_repo }}:{{ .Values.version }}"
           ports:
             - containerPort: {{ .Values.port }}
               protocol: TCP
