@@ -1,0 +1,20 @@
+{{ if .Values.create_route }}
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: languagetool-route
+spec:
+  host: languagetool.apps.jmauser.paas.noris.dev
+  to:
+    kind: Service
+    name: languagetool-service
+    weight: 100
+  port:
+    targetPort: {{ .Values.port }}
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+...
+{{ end }}

@@ -1,0 +1,53 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: languagetool
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: languagetool
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: languagetool
+    spec:
+      containers:
+        - name: languagetool
+          image: {{ .Values.image_repo }}
+          ports:
+            - containerPort: {{ .Values.port }}
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "{{ .Values.resources.limits.cpu }}"
+              memory: "{{ .Values.resources.limits.memory }}"
+            requests:
+              cpu: "{{ .Values.resources.requests.cpu }}"
+              memory: "{{ .Values.resources.requests.memory }}"
+          env:
+            - name: Java_Xms
+              value: {{ .Values.resources.java.Java_Xms }}
+            - name: Java_Xmx
+              value: {{ .Values.resources.java.Java_Xmx }}
+          livenessProbe:
+            httpGet:
+              path: /v2/healthcheck
+              port: {{ .Values.port }}
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+...

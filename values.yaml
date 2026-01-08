@@ -1,0 +1,21 @@
+---
+replicaCount: 3
+
+image_repo: "harbor.noris.net/docker.io/erikvl87/languagetool"
+
+port: 8010
+
+create_route: true
+create_networkpolicy: true
+
+resources:
+  java:
+    Java_Xms: "2g"
+    Java_Xmx: "3g"
+  limits:
+    cpu: "2000m"
+    memory: "4096Mi"
+  requests:
+    cpu: "1000m"
+    memory: "2048Mi"
+...

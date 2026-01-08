@@ -1,0 +1,19 @@
+{{ if .Values.create_networkpolicy }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: policy-languagetool
+spec:
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              network.openshift.io/policy-group: ingress
+  podSelector:
+    matchLabels:
+      app: languagetool
+  policyTypes:
+    - Ingress
+...
+{{ end }}
