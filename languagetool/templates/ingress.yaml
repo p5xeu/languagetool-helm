@@ -3,7 +3,7 @@
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: languagetool
+  name: languagetool-ingress
 spec:
   ingressClassName: openshift-default
   tls:
@@ -18,7 +18,7 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: languagetool
+                name: languagetool-service
                 port:
                   number: 80
 ...
