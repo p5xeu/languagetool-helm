@@ -7,8 +7,9 @@ port: 8010
 
 extUrl: "languagetool.yourdomain.com"
 
-create_route: true
+create_route: false
 create_networkpolicy: true
+createIngress: true
 
 resources:
   java:
@@ -20,4 +21,21 @@ resources:
   requests:
     cpu: "1000m"
     memory: "2048Mi"
+
+cert:
+  # requestCertificate can be set to true, if you have cert-manager installed and want to create certificates
+  requestCertificate: true
+  # kind describes the kind of cert-manager issuer you use, Issuer or ClusterIssuer
+  kind: "ClusterIssuer"
+  # name is the name of the issuer
+  name: ""
+  # secretName ist the name of the secret for the certificate | standard is acme-cert-languagetool
+  secretName: "acme-cert-languagetool"
+
+ingress:
+  # If ingress is true, route has to be false
+  # createIngress has to be set to true, if you want to create an ingress
+  createIngress: true
+  # secretName is the name of the secret for the ingress | standard is acme-cert-languagetool
+  secretName: acme-cert-languagetool
 ...
