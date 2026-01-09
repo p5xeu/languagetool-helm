@@ -2,7 +2,6 @@
 replicaCount: 3
 
 image_repo: "erikvl87/languagetool"
-version: "latest"
 
 port: 8010
 
