@@ -5,6 +5,8 @@ image_repo: "erikvl87/languagetool"
 
 port: 8010
 
+extUrl: "languagetool.yourdomain.com"
+
 create_route: true
 create_networkpolicy: true
 

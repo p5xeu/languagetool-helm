@@ -5,7 +5,7 @@ apiVersion: route.openshift.io/v1
 metadata:
   name: languagetool-route
 spec:
-  host: languagetool.apps.jmauser.paas.noris.dev
+  host: {{ .Values.extUrl }}
   to:
     kind: Service
     name: languagetool-service
