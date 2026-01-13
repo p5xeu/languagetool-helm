@@ -1,40 +1,51 @@
 ---
+# replicaCount specifies the amount of replicas the deployment should have
 replicaCount: 3
 
-image_repo: "erikvl87/languagetool"
+# imageRepo is the image repository to pull the container image from
+imageRepo: "erikvl87/languagetool"
 
+# port that's needed for languagetool
 port: 8010
 
+# extURL is the URL where languagetool is reachable from, no need to add https or www
 extUrl: "languagetool.yourdomain.com"
 
-create_route: false
-create_networkpolicy: true
-createIngress: true
+# create_Route has to be set to true if you want to create a route
+createRoute: false
+# createNetworkpolicy has to be set to true if you want to create a networkpolicy
+createNetworkpolicy: true
 
 resources:
   java:
+    # resources.Java_Xms specifies the amount of RAM in gb that is allocated for java while starting
     Java_Xms: "2g"
+    # resources.Java_Xmx specifies the amount of RAM in gb that is allocated for java while running
     Java_Xmx: "3g"
   limits:
+    # resources.limits.cpu ist the maximum CPU usage of each container, it cant exceed the given CPU usage
     cpu: "2000m"
+    # resources.limits.memory is the maximum amount of RAM for each container, if it reaches the limit the pod gets OOM killed
     memory: "4096Mi"
   requests:
+    # resources.requests.cpu ist the requested CPU usage of each container, it can exceed the CPU request
     cpu: "1000m"
+    # resources.requests.memory is the requested amount of RAM for each container
     memory: "2048Mi"
 
 cert:
-  # requestCertificate can be set to true, if you have cert-manager installed and want to create certificates
+  # cert.requestCertificate can be set to true, if you have cert-manager installed and want to create certificates
   requestCertificate: true
-  # kind describes the kind of cert-manager issuer you use, Issuer or ClusterIssuer
+  # cert.kind describes the kind of cert-manager issuer you use, Issuer or ClusterIssuer
   kind: "ClusterIssuer"
-  # name is the name of the issuer
+  # cert.name is the name of the issuer
   name: ""
-  # secretName ist the name of the secret for the certificate | standard is acme-cert-languagetool
+  # cert.secretName ist the name of the secret for the certificate | standard is acme-cert-languagetool
   secretName: "acme-cert-languagetool"
 
 ingress:
   # If ingress is true, route has to be false
-  # createIngress has to be set to true, if you want to create an ingress
+  # ingress.createIngress has to be set to true, if you want to create an ingress
   createIngress: true
   # secretName is the name of the secret for the ingress | standard is acme-cert-languagetool
   secretName: acme-cert-languagetool

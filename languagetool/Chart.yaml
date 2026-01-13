@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
 name: languagetool
-description: A Helm chart for deploying the languagetool in an OpenShift cluster.
+description: A Helm chart for deploying languagetool in an OpenShift cluster.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
